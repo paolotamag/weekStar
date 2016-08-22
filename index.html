@@ -8,15 +8,19 @@
             .nodelabel {
                 font-family: Arial;
                 font-size: 25px;
+                font-variant: small-caps;
             }
 		</style>
         <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
     </head>
     <body>
-        <center></center>
+        <center><h1 style= "font-family: Arial; font-variant: small-caps;">La Stella Della Settimana</h1></center>
+        <center>
+            <div style="border: 2px solid black; width : 750px; height : 750px;"></div>
+        </center>
         <script type="text/javascript">
         //Width and height
-			var w = 1000;
+			var w = 750;
 			var h = 750;
 
 			//Original data
@@ -68,7 +72,7 @@
 			var colors = d3.scale.category10();
 
 			//Create SVG element
-			var svg = d3.select("body").select("center")
+			var svg = d3.select("body").select("div")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
@@ -79,7 +83,11 @@
 				.enter()
 				.append("line")
 				.style("stroke", "#ccc")
-				.style("stroke-width", 1);
+				.style("stroke-width", function(d, i) {
+                    if (i<=6){
+                           return 1;}
+                         else {
+                            return 5; }});
 			
 			//Create nodes as circles
 			var nodes = svg.selectAll("circle")
@@ -120,7 +128,8 @@
                   .attr("y", function(d) { return d.y; });
 	
 			});
-
+            nodelabels.attr("transform", function(d) 
+                      { return "translate(" + -20 + "," + -25 + ")"; });
 
 		</script>
     </body>
